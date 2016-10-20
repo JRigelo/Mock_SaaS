@@ -1,0 +1,5 @@
+#Parameter inputs to run the SaaS model
+#time unit flag: set it to True if you want month scale
+montly: True
+#dataset
+filepath: ../data/membership.csv
