@@ -60,7 +60,7 @@ def plot_(d):
 
     Arguments
     ---------
-    dictinary
+    Dictinary
 
     Return values
     -------------
