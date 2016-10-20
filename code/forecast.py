@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 """
 Pro-rated refund forecast model for the SaaS project
+This Application provides basic support for forecasting pro-rated refunds
+in order to provide a company a better understanding of the cash reserves
+needed to be kept.
 ----------------------------------------------------------------------------
 
 Usage
@@ -57,7 +60,7 @@ def plot_(d):
 
     Arguments
     ---------
-    None
+    dictinary
 
     Return values
     -------------
