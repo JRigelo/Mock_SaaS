@@ -10,3 +10,9 @@ needed to be kept, daily or montly.
 ## Application Dependencies
 
 - [python 2.7](https://www.python.org/)
+- [pytest](http://doc.pytest.org/en/latest/)
+- [yaml](http://yaml.org/)
+- [Numpy](http://www.numpy.org/)
+- [pandas](http://pandas.pydata.org/)
+- [matplotlib](http://matplotlib.org/)
+- [seaborn](https://seaborn.github.io/)
