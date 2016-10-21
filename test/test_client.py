@@ -35,7 +35,7 @@ class TestClient(unittest.TestCase):
         cl.monthly = False
         unit_value, lifetime_aver, x = cl.get_parameters(cost)
         result = len(x)*unit_value
-        self.assertEqual(round(result), round(cost))
+        self.assertEqual(round(result, 4), round(cost, 4))
 
     def test_cum_exponential(self):
         """
