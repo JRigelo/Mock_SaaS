@@ -1,19 +1,24 @@
+#!/usr/bin/env python
+'''
+Unit tests for class Client
+
+Usage: from root directory run: make test
+'''
+
+# --- Imports
+
+# Standard libraries
 import unittest as unittest
 import pandas as pd
 import numpy as np
 from code.client import Client
 
-
-'''
-Unit tests for class Client
-
-Usage: from main directory run: make test
-'''
+# -- Preparations
 
 # Initialize class Client
 aver_memb_durantion = 4
-montly = True
-cl = Client(aver_memb_durantion, montly)
+monthly = True
+cl = Client(aver_memb_durantion, monthly)
 
 class TestClient(unittest.TestCase):
 
@@ -26,11 +31,11 @@ class TestClient(unittest.TestCase):
         result = len(x)*unit_value
         self.assertEqual(result, cost)
 
-        # for daily based case
-        cl.montly = False
+        # For daily based case
+        cl.monthly = False
         unit_value, lifetime_aver, x = cl.get_parameters(cost)
         result = len(x)*unit_value
-        self.assertEqual(result, cost)
+        self.assertEqual(round(result), round(cost))
 
     def test_cum_exponential(self):
         """
@@ -55,7 +60,7 @@ class TestClient(unittest.TestCase):
         # Mock cost
         cost = np.random.uniform(low=1.0, high=1200, size=None)
 
-        # Assuming montly time unit
+        # Assuming monthly time unit
         unit_value = cost/12.0
         values = np.arange(cost,  0, -unit_value, dtype=np.float)
         refunds = {t: cl.expected_cum_refund(cost, t)/values[t]
