@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 Class Client: Contains support functions used by class Finances to compute
-expected pro-rated refunds in various forms for yearly, montly or daily
+expected prorated refunds in various forms for yearly, monthly or daily
 forecast.
 ----------------------------------------------------------------------------
 
@@ -25,9 +25,11 @@ class Client(object):
     """
     The Client class provides few functions to compute refunds for each client
     """
-    def __init__(self, aver_mem, montly):
-        self.aver_membership = aver_mem # average time of a subscription
-        self.montly = montly # true is time scale is month
+    def __init__(self, aver_mem, monthly):
+        # Average time of a subscription
+        self.aver_membership = aver_mem
+        # True is time scale is month
+        self.monthly = monthly
 
     def get_parameters(self, cost):
         """
@@ -49,16 +51,16 @@ class Client(object):
         -------------
         Numpy float, Numpy float, Numpy array
         """
-        # If montly case
-        if self.montly:
+        # If monthly case
+        if self.monthly:
             unit_value = cost/12.0
             lifetime_aver = self.aver_membership/30.0
-            x = np.arange(1,13,1, dtype = float)
+            x = np.arange(1, 13, 1, dtype=float)
 
-        else: # daily case
+        else:
             unit_value = cost/365.0
             lifetime_aver = self.aver_membership
-            x = np.arange(1,366,1, dtype = float)
+            x = np.arange(1, 366, 1, dtype=float)
 
         return unit_value, lifetime_aver, x
 
@@ -77,7 +79,6 @@ class Client(object):
         """
         return 1 - np.exp(-x/theta)
 
-
     def expected_cum_refund(self, cost, time):
         """
         Computes the expected value of a subscription refund up to a certain
@@ -86,12 +87,11 @@ class Client(object):
         Example:
               The average lifetime of memberships costing 1200 is exponentially
               distributed with mean of 9 months. Thus it has the following
-              expected refund (for montly time scale)
+              expected refund (for monthly time scale)
 
               E(Y) = 1200P(X<=1) + 1100P(1<X<=2) + 1000P(2<X<=3) + ...
-
-	               = 1200(1 - exp(-1/9)) + 1100((1 - exp(-2/9)) - (1 - exp(-1/9)))
-                     + ...
+                   = 1200(1 - exp(-1/9)) + 1100((1 - exp(-2/9)) -
+                     (1 - exp(-1/9))) + ...
 
         Arguments
         ---------
@@ -107,7 +107,8 @@ class Client(object):
         # Array of subscription value in decreasing order
         values = np.arange(cost,  0, -unit_value, dtype=np.float)
 
-        if time == 1: # first month or day
+        # First month or day
+        if time == 1:
 
             return cost*self.cum_exponential(1.0, lifetime_aver)
 
@@ -123,9 +124,7 @@ class Client(object):
             return np.sum(pos_values) - np.sum(neg_values)
 
 
-
-
 if __name__ == '__main__':
     aver_mem = 4
-    montly = True
-    cl = Client(aver_mem, montly)
+    monthly = True
+    cl = Client(aver_mem, monthly)
