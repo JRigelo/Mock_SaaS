@@ -19,31 +19,35 @@ needed to be kept, daily or montly.
 
 ## Running the Application:  
 
-  ~~~~
-  cd code/        
+
+  cd code/
+  ```       
   ipython forecast.py ../input/model_input.yml ../output/mode_output.txt
-  ~~~~   
+  ```   
 
 ## Running the Unit Tests:
-      from the root directory  
-
-      `make test`  
-
+  from the root directory  
+```
+      make test  
+```
 The repository has the following folder structure:  
 
-  Mock_SaaS  
+```
+
+   Mock_SaaS   
   ├── Makefile    
   ├── README.md  
-  ├── code  
-  │     ├── `__init__.py`  
-  |     ├── `client.py`  
-  |     ├── `finances.py`    
-  │     ├── `forecast.py`  
+  ├── code    
+  │     ├── __init__.py  
+  |     ├── client.py  
+  |     ├── finances.py    
+  │     ├── forecast.py  
   ├── data  
-  │     ├── `membership.csv`  
+  │     ├── membership.csv  
   ├── input
-  │     ├── `model_input.yml`  
+  │     ├── model_input.yml  
   └── test
-        ├── `__init__.py`  
-        ├── `test_client.py`  
-        └── `test_finances.py`  
+        ├── __init__.py  
+        ├── test_client.py  
+        └── test_finances.py  
+```
