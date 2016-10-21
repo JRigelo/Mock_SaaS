@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
-Class Finances: Computes expected pro-rated refunds in various forms
-for yearly, montly or daily forecast.
+Class Finances: Computes expected prorated refunds in various forms
+for yearly, monthly or daily forecast.
 ----------------------------------------------------------------------------
 
 Usage
@@ -24,16 +24,16 @@ from client import Client
 
 class Finances(object):
     """
-    The Finances class provides few methods for forecasting pro-rated refunds
+    The Finances class provides few methods for forecasting prorated refunds
     """
     def __init__(self, model_inputs):
 
-        self.montly = model_inputs['montly'] # time scale
+        self.monthly = model_inputs['monthly'] # time scale
         self.df = pd.read_csv(model_inputs['filepath']) # company data
         self.sum_values = np.sum(self.df.ix[:,2]) # total subscription reserve
 
         # Initialize Class Client
-        self.client = Client(self.aver_membership(), self.montly)
+        self.client = Client(self.aver_membership(), self.monthly)
 
 
     def aver_membership(self):
@@ -67,7 +67,7 @@ class Finances(object):
         -------------
         Dictinary
         """
-        return dict(zip(xrange(self.df.ix[:,2].size), self.df.ix[:,2]))
+        return dict(zip(xrange(self.df.ix[:, 2].size), self.df.ix[:, 2]))
 
     def year_refund_per_client(self):
         """
@@ -84,10 +84,10 @@ class Finances(object):
         # Get dictionary with subscription values
         values = self.value_dict()
 
-        if self.montly:
+        if self.monthly:
             for key, value in values.iteritems():
                 values[key] = self.client.expected_cum_refund(value,12)
-        else: # daily
+        else:
             for key, value in values.iteritems():
                 values[key] = self.client.expected_cum_refund(value,365)
 
@@ -96,7 +96,7 @@ class Finances(object):
 
     def refund_cumulative(self):
         """
-        Computes the montly or daily expected cash reserve amounts through the
+        Computes the monthly or daily expected cash reserve amounts through the
         year
 
         Arguments
@@ -107,18 +107,18 @@ class Finances(object):
         -------------
         Dictinary
         """
-        if self.montly:
+        if self.monthly:
             return {t: self.client.expected_cum_refund(self.sum_values, t)
-                    for t in range(1,13)}
-        else: # daily
+                    for t in range(1, 13)}
+        else:
             return {t: self.client.expected_cum_refund(self.sum_values, t + 1)
-                    for t in range(1,366)}
+                    for t in range(1, 366)}
 
     def percentage_refund_cumulative(self):
         """
-        Computes the montly or daily expected percentage cash reserve amounts
+        Computes the monthly or daily expected percentage cash reserve amounts
         through the year
-        
+
         Arguments
         ---------
         None
