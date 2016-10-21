@@ -36,7 +36,7 @@ The repository has the following folder structure:
 
 ```
 
-   Mock_SaaS   
+Mock_SaaS   
   ├── Makefile    
   ├── README.md  
   ├── code    
