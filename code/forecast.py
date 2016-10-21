@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
-Pro-rated refund forecast model for the SaaS project.
-This Application provides basic support for forecasting pro-rated refunds
+Prorated refund forecast model for the SaaS project.
+This Application provides basic support for forecasting prorated refunds
 in order to provide a company a better understanding of the cash reserves
 needed to be kept.
 ----------------------------------------------------------------------------
@@ -44,7 +44,7 @@ def process_command_line():
     """
 
     # Create parser
-    parser = argparse.ArgumentParser(description= 'Parse command line arguments')
+    parser = argparse.ArgumentParser(description='Parse command line arguments')
 
     # Add positional arguments
     parser.add_argument('model_input', help='name of yml input file')
@@ -68,8 +68,8 @@ def plot_(d):
     """
 
     sns.barplot(x=d.keys(), y=d.values())
-    plt.title('Percentage Cash to Keep')
-    plt.ylabel('Cash')
+    plt.title('Percentage Total Reserve to Keep')
+    plt.ylabel('Reserve Percentage')
     plt.xlabel('Time')
     plt.show()
 
@@ -91,12 +91,12 @@ def main():
     # Initialize Finances
     fin = Finances(model_inputs)
 
-    # Get pro-rated refund forecast
+    # Get prorated refund forecast
     perc_refund = fin.percentage_refund_cumulative()
 
     # Json output
     with open(outname, 'w') as output:
-        json.dump(perc_refund, output, sort_keys = True, indent = 4)
+        json.dump(perc_refund, output, sort_keys=True, indent=4)
 
     # Plot result
     plot_(perc_refund)
