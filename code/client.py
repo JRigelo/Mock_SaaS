@@ -123,6 +123,49 @@ class Client(object):
             # Expected value
             return np.sum(pos_values) - np.sum(neg_values)
 
+    def expected_refund(self, cost, time):
+        """
+        Computes the expected value of a subscription refund for a month
+        or day t
+
+        Example:
+              The average lifetime of memberships costing 1200 is exponentially
+              distributed with mean of 9 months. Thus it has the following
+              expected refund for month 2
+
+              E(Y) = 1100P(1<X<=2)
+                   = 1100((1 - exp(-2/9))
+
+        Arguments
+        ---------
+        Numpy float, Int
+
+        Return values
+        -------------
+        Numpy float
+        """
+        # Get the parameters needed
+        unit_value, lifetime_aver, x = self.get_parameters(cost)
+
+        # Array of subscription value in decreasing order
+        values = np.arange(cost,  0, -unit_value, dtype=np.float)
+
+        # First month or day
+        if time == 1:
+
+            return cost*self.cum_exponential(1.0, lifetime_aver)
+
+        else:
+            x = x[time - 1:time]
+            values = values[time - 1:time]
+            pos_values = values*self.cum_exponential(x, lifetime_aver)
+            x_neg = x[:-1]
+            neg_values = values[1:]
+            neg_values = neg_values*self.cum_exponential(x_neg, lifetime_aver)
+
+            # Expected value
+            return np.sum(pos_values) - np.sum(neg_values)
+
 
 if __name__ == '__main__':
     aver_mem = 4
