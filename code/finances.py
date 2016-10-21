@@ -111,7 +111,7 @@ class Finances(object):
             return {t: self.client.expected_cum_refund(self.sum_values, t)
                     for t in range(1, 13)}
         else:
-            return {t: self.client.expected_cum_refund(self.sum_values, t + 1)
+            return {t: self.client.expected_cum_refund(self.sum_values, t)
                     for t in range(1, 366)}
 
     def percentage_refund_cumulative(self):
@@ -129,6 +129,42 @@ class Finances(object):
         """
         return {key: round(refund*100/self.sum_values)
                 for key,refund in self.refund_cumulative().iteritems()}
+
+    def refund(self):
+        """
+        Computes the monthly or daily expected cash reserve amounts for each
+        month or day t
+
+        Arguments
+        ---------
+        None
+
+        Return values
+        -------------
+        Dictinary
+        """
+        if self.monthly:
+            return {t: self.client.expected_refund(self.sum_values, t)
+                    for t in range(1, 13)}
+        else:
+            return {t: self.client.expected_refund(self.sum_values, t)
+                    for t in range(1, 366)}
+
+    def percentage_refund(self):
+        """
+        Computes the monthly or daily expected percentage cash reserve amounts
+        through the year
+
+        Arguments
+        ---------
+        None
+
+        Return values
+        -------------
+        Dictinary
+        """
+        return {key: round(refund*100/self.sum_values)
+                for key,refund in self.refund().iteritems()}
 
 if __name__ == '__main__':
     pass
