@@ -28,7 +28,7 @@ class Client(object):
     def __init__(self, aver_mem, monthly):
         # Average time of a subscription
         self.aver_membership = aver_mem
-        # True is time scale is month
+        # True if time scale is month
         self.monthly = monthly
 
     def get_parameters(self, cost):
