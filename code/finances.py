@@ -22,19 +22,21 @@ import pandas as pd
 # Application classes
 from client import Client
 
+
 class Finances(object):
     """
     The Finances class provides few methods for forecasting prorated refunds
     """
     def __init__(self, model_inputs):
-
-        self.monthly = model_inputs['monthly'] # time scale
-        self.df = pd.read_csv(model_inputs['filepath']) # company data
-        self.sum_values = np.sum(self.df.ix[:,2]) # total subscription reserve
+        # True if time scale is month
+        self.monthly = model_inputs['monthly']
+        # Company's data
+        self.df = pd.read_csv(model_inputs['filepath'])
+        # Total subscription reserve
+        self.sum_values = np.sum(self.df.ix[:, 2])
 
         # Initialize Class Client
         self.client = Client(self.aver_membership(), self.monthly)
-
 
     def aver_membership(self):
         """
@@ -48,9 +50,10 @@ class Finances(object):
         -------------
         Numpy float
         """
-        df = self.df.copy() # make a copy of dataset
+        # Make a copy of dataset
+        df = self.df.copy()
         # Calculate the duration of each subscription
-        lifetime = pd.to_datetime(df.ix[:,1]) - pd.to_datetime(df.ix[:,0])
+        lifetime = pd.to_datetime(df.ix[:, 1]) - pd.to_datetime(df.ix[:, 0])
 
         # Average time (in days) of the subscriptions
         return np.mean(lifetime.astype('timedelta64[D]'))
@@ -86,10 +89,10 @@ class Finances(object):
 
         if self.monthly:
             for key, value in values.iteritems():
-                values[key] = self.client.expected_cum_refund(value,12)
+                values[key] = self.client.expected_cum_refund(value, 12)
         else:
             for key, value in values.iteritems():
-                values[key] = self.client.expected_cum_refund(value,365)
+                values[key] = self.client.expected_cum_refund(value, 365)
 
         # Expected refunds for each client
         return values
@@ -128,7 +131,7 @@ class Finances(object):
         Dictinary
         """
         return {key: round(refund*100/self.sum_values)
-                for key,refund in self.refund_cumulative().iteritems()}
+                for key, refund in self.refund_cumulative().iteritems()}
 
     def refund(self):
         """
@@ -164,7 +167,7 @@ class Finances(object):
         Dictinary
         """
         return {key: round(refund*100/self.sum_values)
-                for key,refund in self.refund().iteritems()}
+                for key, refund in self.refund().iteritems()}
 
 if __name__ == '__main__':
     pass
