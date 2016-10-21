@@ -79,6 +79,21 @@ class Client(object):
         """
         return 1 - np.exp(-x/theta)
 
+    def exponential(self, x, theta):
+        """
+        Computes the exponential distribution depending on the
+        average time of the subscriptions, theta.
+
+        Arguments
+        ---------
+        Numpy array, Numpy float
+
+        Return values
+        -------------
+        Numpy array
+        """
+        return 1.0/theta*np.exp(-x/theta)
+
     def expected_cum_refund(self, cost, time):
         """
         Computes the expected value of a subscription refund up to a certain
@@ -153,15 +168,15 @@ class Client(object):
         # First month or day
         if time == 1:
 
-            return cost*self.cum_exponential(1.0, lifetime_aver)
+            return cost*self.exponential(1.0, lifetime_aver)
 
         else:
             x = x[time - 1:time]
             values = values[time - 1:time]
-            pos_values = values*self.cum_exponential(x, lifetime_aver)
+            pos_values = values*self.exponential(x, lifetime_aver)
             x_neg = x[:-1]
             neg_values = values[1:]
-            neg_values = neg_values*self.cum_exponential(x_neg, lifetime_aver)
+            neg_values = neg_values*self.exponential(x_neg, lifetime_aver)
 
             # Expected value
             return np.sum(pos_values) - np.sum(neg_values)
