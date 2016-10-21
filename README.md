@@ -17,6 +17,13 @@ needed to be kept, daily or montly.
 - [matplotlib](http://matplotlib.org/)
 - [seaborn](https://seaborn.github.io/)
 
+
+## Running the Unit Tests:
+  from the root directory  
+```
+      make test        
+```
+
 ## Running the Application:  
 
 
@@ -25,11 +32,6 @@ needed to be kept, daily or montly.
   ipython forecast.py ../input/model_input.yml ../output/mode_output.txt
   ```   
 
-## Running the Unit Tests:
-  from the root directory  
-```
-      make test  
-```
 The repository has the following folder structure:  
 
 ```
