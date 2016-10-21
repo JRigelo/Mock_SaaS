@@ -53,7 +53,7 @@ def process_command_line():
     # Parse arguments
     return parser.parse_args()
 
-def plot_(d):
+def plot_(d1,d2):
     """
     Plots the cash percentage in the finances reserve needed to the kept
     depending on a time scale, month or day.
@@ -66,11 +66,20 @@ def plot_(d):
     -------------
     None
     """
+    plt.figure(figsize=(18,10))
 
-    sns.barplot(x=d.keys(), y=d.values())
+    plt.subplot(211)
+    sns.barplot(x=d1.keys(), y=d1.values())
     plt.title('Percentage Total Reserve to Keep')
     plt.ylabel('Reserve Percentage')
     plt.xlabel('Time')
+
+    plt.subplot(212)
+    sns.barplot(x=d2.keys(), y=d2.values())
+    plt.title('Cumulative Percentage Total Reserve to Keep')
+    plt.ylabel('Reserve Percentage')
+    plt.xlabel('Time')
+
     plt.show()
 
 # --- Main program
@@ -91,15 +100,20 @@ def main():
     # Initialize Finances
     fin = Finances(model_inputs)
 
+    # Get cumulative prorated refund forecast
+    perc_refund_cum = fin.percentage_refund_cumulative()
+
     # Get prorated refund forecast
-    perc_refund = fin.percentage_refund_cumulative()
+    perc_refund = fin.percentage_refund()
+
 
     # Json output
     with open(outname, 'w') as output:
         json.dump(perc_refund, output, sort_keys=True, indent=4)
+        json.dump(perc_refund_cum, output, sort_keys=True, indent=4)
 
     # Plot result
-    plot_(perc_refund)
+    plot_(perc_refund, perc_refund_cum)
 
 # --- Main script
 
