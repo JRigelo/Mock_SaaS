@@ -29,7 +29,7 @@ class TestClient(unittest.TestCase):
         cost = np.random.uniform(low=0.0, high=1200, size=None)
         unit_value, lifetime_aver, x = cl.get_parameters(cost)
         result = len(x)*unit_value
-        self.assertEqual(result, cost)
+        self.assertEqual(round(result, 4), round(cost, 4))
 
         # For daily based case
         cl.monthly = False
