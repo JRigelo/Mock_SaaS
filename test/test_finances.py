@@ -11,8 +11,8 @@ Usage: from root directory run: make test
 import unittest as unittest
 import pandas as pd
 import numpy as np
-from code.finances import Finances
-from code.forecast import process_command_line
+from SaaSModel.finances import Finances
+from SaaSModel.forecast import process_command_line
 
 
 # -- Preparations
