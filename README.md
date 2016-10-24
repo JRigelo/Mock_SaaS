@@ -1,13 +1,41 @@
-# Mock_SaaS
+README
+======
 
-## Overview
+------------------------------------------------------------------------------
+
+Contents
+--------
+
+A. Overview
+
+B. Installation
+
+  1. Software Dependencies
+
+C. Documentation
+
+  1. Running the Unit Tests
+  2. Running the Application
+
+--------------------------------------------------------------------------
+A. Overview
+------------
 
 Prorated refund forecast model for the Mock SaaS project.
 This Application provides basic support for forecasting prorated refunds
 in order to provide a company a better understanding of the cash reserves
-needed to be kept, daily or montly.
+needed to be kept, daily or monthly.
 
-## Application Dependencies
+--------------------------------------------------------------------------
+B. Installation
+---------------
+To install dependencies, from root directory run
+
+```
+  pip install -r requirements.txt
+```
+
+### 1. Software Dependencies ###
 
 - [python 2.7](https://www.python.org/)
 - [pytest](http://doc.pytest.org/en/latest/)
@@ -17,17 +45,23 @@ needed to be kept, daily or montly.
 - [matplotlib](http://matplotlib.org/)
 - [seaborn](https://seaborn.github.io/)
 
+See the updated list of dependencies in the `requirements.txt` file.
 
-## Running the Unit Tests:
-  from the root directory  
+--------------------------------------------------------------------------
+C. Documentation
+----------------
+
+### 1. Running the Unit Tests ###
+
+  From the root directory run
 ```
       make test        
 ```
 
-## Running the Application:  
+### 2. Running the Application ##  
 
 
-  cd code/
+  cd SaaSModel/
   ```       
   ipython forecast.py ../input/model_input.yml ../output/mode_output.txt
   ```   
@@ -38,8 +72,9 @@ The repository has the following folder structure:
 
 Mock_SaaS   
   ├── Makefile    
-  ├── README.md  
-  ├── code    
+  ├── README.md
+  ├── requirements.txt    
+  ├── SaaSModel    
   │     ├── __init__.py  
   |     ├── client.py  
   |     ├── finances.py    
@@ -48,6 +83,7 @@ Mock_SaaS
   │     ├── membership.csv  
   ├── input
   │     ├── model_input.yml  
+  ├── output
   └── test
         ├── __init__.py  
         ├── test_client.py  
