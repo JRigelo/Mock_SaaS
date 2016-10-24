@@ -53,23 +53,21 @@ C. Documentation
 
 ### 1. Running the Unit Tests ###
 
-  From the root directory run
+From the root directory run
 ```
-      make test        
+make test        
 ```
 
 ### 2. Running the Application ##  
 
-
-  cd SaaSModel/
-  ```       
-  ipython forecast.py ../input/model_input.yml ../output/mode_output.txt
-  ```   
+cd SaaSModel/
+```       
+ipython forecast.py ../input/model_input.yml ../output/mode_output.txt
+```   
 
 The repository has the following folder structure:  
 
 ```
-
 Mock_SaaS   
   ├── Makefile    
   ├── README.md
