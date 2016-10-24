@@ -3,15 +3,6 @@
 Class Client: Contains support functions used by class Finances to compute
 expected prorated refunds in various forms for yearly, monthly or daily
 forecast.
-----------------------------------------------------------------------------
-
-Usage
------
-The following line uses/access this class and its methods:
-
-    $ ipython forecast.py ../input/model_input.yml ../output/mode_output.txt
-
-----------------------------------------------------------------------------
 """
 
 # --- Imports
@@ -149,7 +140,7 @@ class Client(object):
               expected refund for month 2
 
               E(Y) = 1100P(1<X<=2)
-                   = 1100((1 - exp(-2/9))
+                   = 1100*1/9*exp(-2/9)
 
         Arguments
         ---------
