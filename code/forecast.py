@@ -108,8 +108,7 @@ def main():
 
 
     # Json output
-    with open(outname, 'w') as output:
-        json.dump(perc_refund, output, sort_keys=True, indent=4)
+    with open(outname, 'w') as output:        
         json.dump(perc_refund_cum, output, sort_keys=True, indent=4)
 
     # Plot result
