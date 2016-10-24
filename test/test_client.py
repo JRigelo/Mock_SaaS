@@ -11,7 +11,7 @@ Usage: from root directory run: make test
 import unittest as unittest
 import pandas as pd
 import numpy as np
-from code.client import Client
+from SaaSModel.client import Client
 
 # -- Preparations
 
