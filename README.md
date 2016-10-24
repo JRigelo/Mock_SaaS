@@ -68,7 +68,7 @@ ipython forecast.py ../input/model_input.yml ../output/mode_output.txt
 The repository has the following folder structure:  
 
 ```
-Mock_SaaS   
+.   
   ├── Makefile    
   ├── README.md
   ├── requirements.txt    
