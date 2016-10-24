@@ -2,15 +2,6 @@
 """
 Class Finances: Computes expected prorated refunds in various forms
 for yearly, monthly or daily forecast.
-----------------------------------------------------------------------------
-
-Usage
------
-The following line uses/access this class and its methods:
-
-    $ ipython forecast.py ../input/model_input.yml ../output/mode_output.txt
-
-----------------------------------------------------------------------------
 """
 
 # --- Imports
@@ -130,7 +121,7 @@ class Finances(object):
         -------------
         Dictinary
         """
-        return {key: round(refund*100/self.sum_values)
+        return {key: round(refund*100/self.sum_values, 2)
                 for key, refund in self.refund_cumulative().iteritems()}
 
     def refund(self):
