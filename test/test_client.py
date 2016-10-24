@@ -13,6 +13,11 @@ import pandas as pd
 import numpy as np
 from SaaSModel.client import Client
 
+# --- Constants
+
+EPSILON = 1.2e-7  # From POSIX float.h
+_ZERO_TOL = 10 * EPSILON
+
 # -- Preparations
 
 # Initialize class Client
@@ -29,13 +34,19 @@ class TestClient(unittest.TestCase):
         cost = np.random.uniform(low=0.0, high=1200, size=None)
         unit_value, lifetime_aver, x = cl.get_parameters(cost)
         result = len(x)*unit_value
-        self.assertEqual(round(result, 4), round(cost, 4))
+        self.assertTrue(
+            np.allclose(cost, result, atol=_ZERO_TOL),
+            "Expected:\n{0}\n"
+            "Got:\n{1}\n".format(cost, result))
 
         # For daily based case
         cl.monthly = False
         unit_value, lifetime_aver, x = cl.get_parameters(cost)
         result = len(x)*unit_value
-        self.assertEqual(round(result, 4), round(cost, 4))
+        self.assertTrue(
+            np.allclose(cost, result, atol=_ZERO_TOL),
+            "Expected:\n{0}\n"
+            "Got:\n{1}\n".format(cost, result))
 
     def test_cum_exponential(self):
         """
@@ -46,11 +57,19 @@ class TestClient(unittest.TestCase):
         x2 = 10000
         theta = 10
 
+        # Cumulative distribution is zero
         zero = cl.cum_exponential(x1, theta)
-        self.assertEqual(zero, 0) # cum distribution is zero
+        self.assertTrue(
+            np.allclose(0.0, zero, atol=_ZERO_TOL),
+            "Expected:\n{0}\n"
+            "Got:\n{1}\n".format(0.0, zero))
 
+        # Cumulative distribution is one
         one = cl.cum_exponential(x2, theta)
-        self.assertEqual(one, 1)  # cum distribution is one
+        self.assertTrue(
+            np.allclose(1.0, one, atol=_ZERO_TOL),
+            "Expected:\n{0}\n"
+            "Got:\n{1}\n".format(1.0, one))
 
     def test_expected_cum_refund(self):
         """
