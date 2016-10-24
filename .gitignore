@@ -4,6 +4,7 @@
 .idea
 *.bak
 *.swp
+*.csv
 *.txt
 *.log
 *.json
